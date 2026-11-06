@@ -1,6 +1,7 @@
 import re
 from urllib.parse import urlparse
 from research import search_web
+from concurrent.futures import ThreadPoolExecutor
 
 
 def is_linkedin_profile(url):
@@ -151,11 +152,10 @@ def enrich_leads(leads):
 
     enriched_leads = []
 
-    for lead in leads:
+    def process(lead):
 
         try:
-            enriched = enrich_lead(lead)
-            enriched_leads.append(enriched)
+            return enrich_lead(lead)
 
         except Exception as e:
 
@@ -167,6 +167,13 @@ def enrich_leads(leads):
                 "linkedin_status": "error"
             })
 
-            enriched_leads.append(lead)
+            return lead
+
+    # Process 4 leads simultaneously
+    with ThreadPoolExecutor(max_workers=4) as executor:
+
+        enriched_leads = list(
+            executor.map(process, leads)
+        )
 
     return enriched_leads

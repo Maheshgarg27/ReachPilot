@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ReachPilot</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🚀 ReachPilot</h1>
+
+        <p class="subtitle">
+            AI LinkedIn Outreach Assistant
+        </p>
+
+        <label>Who do you want to find?</label>
+
+        <textarea
+            id="searchPrompt"
+            placeholder="Find founders and CEOs of AI startups in India..."
+        ></textarea>
+
+        <label>Number of leads</label>
+
+        <input
+            type="number"
+            id="leadCount"
+            value="3"
+            min="1"
+            max="50"
+        >
+
+        <label>Your outreach message</label>
+
+        <textarea
+            id="messageTemplate"
+            class="message"
+            placeholder="Hi [name],&#10;&#10;I'm Mahesh...&#10;&#10;I would love to explore opportunities at [company]."
+        ></textarea>
+
+        <button id="startButton">
+            🚀 Start Outreach
+        </button>
+
+        <p id="status"></p>
+
+    </div>
+
+    <script src="popup.js"></script>
+
+</body>
+</html>
